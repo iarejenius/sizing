@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 
-@Component({
-  selector: 'app-counter-component',
-  templateUrl: './counter.component.html'
+@Injectable({
+  providedIn: 'root'
 })
-export class CounterComponent {
-  public currentCount = 0;
+export class SessionService {
 
   private connection: signalR.HubConnection;
 
@@ -21,7 +19,10 @@ export class CounterComponent {
     });
   }
 
-  public incrementCounter() {
-    this.currentCount++;
+  createSession() {
+    this.connection.send('createSession')
+      .then(() => console.log('message sent'))
+      .catch((err) => console.error(err));
   }
+
 }
