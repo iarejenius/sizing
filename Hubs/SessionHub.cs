@@ -16,6 +16,7 @@ namespace sizing.Hubs
         public async Task CreateSession()
         {
             var session = SessionRepository.CreateSession();
+            Console.WriteLine(session);
             await Clients.Caller.SendAsync("sessionCreated", session);
         }
 

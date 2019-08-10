@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-counter-component',
@@ -8,20 +8,14 @@ import * as signalR from '@aspnet/signalr';
 export class CounterComponent {
   public currentCount = 0;
 
-  private connection: signalR.HubConnection;
-
-  constructor() {
-    this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('/hub')
-      .build();
-
-    this.connection.start().catch(err => console.error(err));
-    this.connection.on('sessionCreated', (session: any) => {
+  constructor(private sessionServer: SessionService) {
+    this.sessionServer.newSessions.subscribe((session: any) => {
       console.log(session);
     });
   }
 
-  public incrementCounter() {
+  public; incrementCounter() {
+    this.sessionServer.createSession();
     this.currentCount++;
   }
 }
