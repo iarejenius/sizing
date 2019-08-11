@@ -15,12 +15,13 @@ namespace DataAccess
         {
             var session = GetSession(sessionKey);
             var participant = new Models.Participant(name);
+            session.Participants.Add(participant);
             return participant;
         }
 
-        public Models.Session CreateSession()
+        public Models.Session CreateSession(string connectionId)
         {
-            var session = new Models.Session();
+            var session = new Models.Session(connectionId);
             Sessions.Add(session.Key, session);
             return session;
         }
@@ -28,6 +29,11 @@ namespace DataAccess
         public Models.Session GetSession(string key)
         {
             return Sessions[key];
+        }
+
+        public void RemoveSession(string key)
+        {
+            Sessions.Remove(key);
         }
     }
 }

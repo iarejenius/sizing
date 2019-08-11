@@ -8,7 +8,7 @@ namespace Models
     {
         const string possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        public Session()
+        public Session(string connectionId)
         {
             var key = "";
             var random = new Random();
@@ -17,11 +17,13 @@ namespace Models
                 key += possibleValues[random.Next(possibleValues.Length)];
 
             this.Key = key;
+
+            this.ConnectionId = connectionId;
         }
 
         public string Key { get; set; }
         public List<Models.Participant> Participants { get; set; }
-
+        public string ConnectionId { get; set; }
 
     }
 }

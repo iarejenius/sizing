@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
+import { Session } from '../models/session';
+import { Participant } from '../models/participant';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,10 @@ import { Observable } from 'rxjs';
 export class SessionService {
 
   private connection: signalR.HubConnection;
-  public newSessions: Observable<any>;
+  public sessionCreated: Observable<Session>;
+  public participantJoined: Observable<Participant>;
+  public participantUpdated: Observable<Participant>;
+  public participantLeft: Observable<Participant>;
 
   constructor() {
     this.connection = new signalR.HubConnectionBuilder()
@@ -17,18 +22,34 @@ export class SessionService {
 
     this.connection.start().catch(err => console.error(err));
 
-    this.newSessions = new Observable<any>((observer) => {
-      this.connection.on('sessionCreated', (session: any) => {
+    this.sessionCreated = new Observable<Session>((observer) => {
+      this.connection.on('sessionCreated', (session: Session) => {
         observer.next(session);
-
-        // Calling this just means that subsequent calls to createSession
-        // call us back here.
         observer.complete();
       });
       return () => {
         this.connection.off('sessionCreated', observer.next);
       };
     });
+
+    this.participantJoined = new Observable<Participant>((observer) => {
+      this.connection.on('participantJoined', (participant: Participant) => {
+        observer.next(participant);
+      });
+      return () => {
+        this.connection.off('participantJoined', observer.next);
+      };
+    });
+
+    this.participantLeft = new Observable<Participant>((observer) => {
+      this.connection.on('participantLeft', (participant: Participant) => {
+        observer.next(participant);
+      });
+      return () => {
+        this.connection.off('participantLeft', observer.next);
+      };
+    });
+
   }
 
   createSession() {
