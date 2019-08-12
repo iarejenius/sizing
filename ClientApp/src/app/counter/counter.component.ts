@@ -21,6 +21,8 @@ export class CounterComponent {
     this.sessionService.participantJoined.subscribe((participant: Participant) => {
       console.log('joined');
       console.log(participant);
+      participant.size = '3';
+      this.participantService.updateParticipant(participant);
     });
 
     this.sessionService.participantUpdated.subscribe((participant: Participant) => {

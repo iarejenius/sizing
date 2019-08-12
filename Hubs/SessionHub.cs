@@ -15,6 +15,12 @@ namespace sizing.Hubs
             SessionRepository = sessionRepository;
         }
 
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            var participant = SessionRepository.FindParticipantByConnectionId(Context.ConnectionId);
+            await RemoveParticipant(participant);
+        }
+
         public async Task CreateSession()
         {
             var session = SessionRepository.CreateSession(Context.ConnectionId);
@@ -26,6 +32,7 @@ namespace sizing.Hubs
         {
             var parentSession = SessionRepository.GetSession(sessionKey);
             var participant = SessionRepository.CreateParticipant(sessionKey, name);
+            participant.ConnectionId = Context.ConnectionId;
             Console.WriteLine(participant);
             await Groups.AddToGroupAsync(Context.ConnectionId, sessionKey);
             await Clients.Client(parentSession.ConnectionId).SendAsync("participantJoined", participant);
@@ -44,16 +51,32 @@ namespace sizing.Hubs
 
         // Endpoint to handle when participant is updated
         // Add observable to session service for when a particular participant updates
-        public async Task UpdateParticipant(Participant participant)
+        public async Task UpdateParticipant(Participant updatedParticipant)
         {
-            
+            Console.WriteLine("Updating participant");
+            SessionRepository.UpdateParticipant(updatedParticipant);
+            var parentSession = SessionRepository.GetSession(updatedParticipant.SessionKey);
+            await Clients.Client(parentSession.ConnectionId).SendAsync("participantUpdated", updatedParticipant);
         }
 
         // Endpoint to handle when participant leaves
         // Add observable to session service for when a particular participant exits
+        public async Task RemoveParticipant(Participant removeParticipant)
+        {
+            Console.WriteLine("Removing participant");
+            SessionRepository.RemoveParticipant(removeParticipant);
+            var parentSession = SessionRepository.GetSession(removeParticipant.SessionKey);
+            await Groups.RemoveFromGroupAsync(removeParticipant.ConnectionId, removeParticipant.SessionKey);
+            await Clients.Client(parentSession.ConnectionId).SendAsync("participantLeft", removeParticipant);
+        }
 
         // Endpoint to handle when session clears sizes
         // Add observable to participant service for when size is cleared
+        public async Task ClearSize(Session session)
+        {
+            SessionRepository.GetSession(session.Key);
+            await Clients.Group(session.Key).SendAsync("clearSize");
+        }
 
     }
 }

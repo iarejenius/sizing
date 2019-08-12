@@ -41,6 +41,12 @@ export class SessionService {
       };
     });
 
+    this.participantUpdated = new Observable<Participant>((observer) => {
+      this.connection.on('participantUpdated', (participant: Participant) => {
+        observer.next(participant);
+      });
+    });
+
     this.participantLeft = new Observable<Participant>((observer) => {
       this.connection.on('participantLeft', (participant: Participant) => {
         observer.next(participant);

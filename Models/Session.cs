@@ -19,6 +19,7 @@ namespace Models
             this.Key = key;
 
             this.ConnectionId = connectionId;
+            this.Participants = new List<Participant>();
         }
 
         public string Key { get; set; }

@@ -11,7 +11,9 @@ namespace Models
         }
         public string Name { get; set; }
         public string SessionKey { get; set; }
-        public Size Size { get; set; }
+        public string Size { get; set; }
         public Guid Id { get; set; }
+
+        public string ConnectionId { get; set; }
     }
 }

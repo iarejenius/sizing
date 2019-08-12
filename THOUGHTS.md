@@ -81,3 +81,14 @@ let subscription = fromSignalR(connection, 'participantUpdate')
     });
 
 ```
+
+## Service and Client models
+We've got...
+- Component models
+- Client service models
+- Service hub models
+- Repo models
+
+How many of these can be or should be the same?
+Which ones will need to differ?
+Make them all the same, updates should only apply if they're null, otherwise use the values that are there
