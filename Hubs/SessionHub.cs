@@ -18,7 +18,10 @@ namespace sizing.Hubs
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var participant = SessionRepository.FindParticipantByConnectionId(Context.ConnectionId);
-            await RemoveParticipant(participant);
+            if (participant != null)
+            {
+                await RemoveParticipant(participant);
+            }
         }
 
         public async Task CreateSession()
@@ -42,11 +45,14 @@ namespace sizing.Hubs
         // Add observable to participant service for when terminated
         public async Task EndSession(string sessionKey)
         {
-            // Send message to session group that session has ended
-            await Clients.Group(sessionKey).SendAsync("sessionEnded");
             var session = SessionRepository.GetSession(sessionKey);
-            // Delete session from repository
-            SessionRepository.RemoveSession(sessionKey);
+            if (session != null)
+            {
+                // Send message to session group that session has ended
+                await Clients.Group(sessionKey).SendAsync("sessionEnded");
+                // Delete session from repository
+                SessionRepository.RemoveSession(sessionKey);
+            }
         }
 
         // Endpoint to handle when participant is updated

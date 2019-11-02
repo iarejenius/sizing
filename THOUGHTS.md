@@ -92,3 +92,41 @@ We've got...
 How many of these can be or should be the same?
 Which ones will need to differ?
 Make them all the same, updates should only apply if they're null, otherwise use the values that are there
+
+# Front end design
+## Initial questions
+- Supported routes and progression?
+    - Default?
+    - Specific ones
+        - Join
+        - Start
+    - Navigation
+        - No navigating between the two
+- Components?
+
+## Changes to make
+### Routing
+- main.ts -> AppModule -> AppComponent -> leave `router-outlet`
+- Update RouterModule arguments in app.module.ts
+    - Default to new session
+    - Route for new session
+    - Route for joining session
+
+### Components
+#### Idea 1
+- Session
+    - If no key given, create a new session and display
+    - If key given, look up session and display (if they navigate away they can get back?)
+- Participant
+    - If no participant data, get participant info and join
+    - If participant data, display sizing fields... maybe
+
+#### Idea 2
+- StartSession (i.e. add session)
+    - Creates a new session and routes to Session
+- Session (i.e. view, edit, and delete session)
+    - Displays given session data
+- Join (i.e. add participant)
+    - Creates a new participant and routes to Participant
+- Participant (i.e. view, edit, and delete participant)
+    - Displays given participant data

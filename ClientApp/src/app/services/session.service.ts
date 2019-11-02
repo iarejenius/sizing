@@ -14,13 +14,21 @@ export class SessionService {
   public participantJoined: Observable<Participant>;
   public participantUpdated: Observable<Participant>;
   public participantLeft: Observable<Participant>;
+  public connected: Observable<boolean>;
 
   constructor() {
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl('/hub')
       .build();
 
-    this.connection.start().catch(err => console.error(err));
+    this.connected = new Observable<boolean>((observer) => {
+      this.connection.start()
+        .then(() => observer.next(true), () => observer.next(false))
+        .catch(err => console.error(err));
+      return () => {
+        this.connection.stop();
+      };
+    });
 
     this.sessionCreated = new Observable<Session>((observer) => {
       this.connection.on('sessionCreated', (session: Session) => {
