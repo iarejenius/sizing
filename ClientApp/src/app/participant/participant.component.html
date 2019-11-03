@@ -1,0 +1,20 @@
+<h1>Welcome, participant</h1>
+<div *ngIf="participant == null">
+  <label>
+    Session key:
+    <input type="text" [formControl]="key">
+  </label>
+
+  <label>
+    Name:
+    <input type="text" [formControl]="name">
+  </label>
+  <p>
+    <button (click)="join()" [disabled]="!key.value || !name.value" class="btn btn-primary">Join</button>
+  </p>
+</div>
+<div *ngIf="participant">
+  <label>
+    Name: <span>{{participant.name}}</span>
+  </label>
+</div>

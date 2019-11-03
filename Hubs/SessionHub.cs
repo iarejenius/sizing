@@ -37,8 +37,11 @@ namespace sizing.Hubs
             var participant = SessionRepository.CreateParticipant(sessionKey, name);
             participant.ConnectionId = Context.ConnectionId;
             Console.WriteLine(participant);
-            await Groups.AddToGroupAsync(Context.ConnectionId, sessionKey);
-            await Clients.Client(parentSession.ConnectionId).SendAsync("participantJoined", participant);
+
+            await Task.WhenAll(
+                Groups.AddToGroupAsync(Context.ConnectionId, sessionKey),
+                Clients.Caller.SendAsync("participantCreated", participant),
+                Clients.Client(parentSession.ConnectionId).SendAsync("participantJoined", participant));
         }
 
         // Endpoint to handle when session is terminated

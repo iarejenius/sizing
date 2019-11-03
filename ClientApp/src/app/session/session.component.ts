@@ -26,7 +26,7 @@ export class SessionComponent implements OnInit {
           this.sessionService.createSession();
         }
       } else {
-        console.log('Failed to connect');
+        console.error('Failed to connect');
       }
     });
 

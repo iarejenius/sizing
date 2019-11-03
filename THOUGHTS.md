@@ -130,3 +130,7 @@ Make them all the same, updates should only apply if they're null, otherwise use
     - Creates a new participant and routes to Participant
 - Participant (i.e. view, edit, and delete participant)
     - Displays given participant data
+
+### Participant
+- Once connection is established, create new participant
+- Once new participant is created populate the component and enable the action
