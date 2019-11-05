@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../services/session.service';
 import { Session } from '../models/session';
+import { Participant } from '../models/participant';
 
 @Component({
   selector: 'app-session',
@@ -10,6 +11,7 @@ import { Session } from '../models/session';
 export class SessionComponent implements OnInit {
 
   private key: string;
+  private participants: Participant[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private sessionService: SessionService) {
 
@@ -31,6 +33,16 @@ export class SessionComponent implements OnInit {
     });
 
     // Set up participant handlers here.
+    this.sessionService.participantJoined.subscribe(participant => {
+      console.log(`${participant.name} joined`);
+      this.participants.push(participant);
+    });
+
+    this.sessionService.participantLeft.subscribe(participant => {
+      console.log(`${participant.name} left`);
+      const index = this.participants.findIndex(p => p.id === participant.id);
+      this.participants.splice(index, 1);
+    });
   }
 
   ngOnInit() { }

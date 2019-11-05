@@ -3,3 +3,16 @@
 </p>
 <label>Key: </label>
 <p>{{key}}</p>
+<div *ngIf="participants.length < 1">
+  Waiting for participants to join...
+</div>
+<div *ngIf="participants">
+  <div *ngFor="let p of participants">
+    <div>
+      {{p.name}}
+    </div>
+    <div>
+      {{p.size}}
+    </div>
+  </div>
+</div>
