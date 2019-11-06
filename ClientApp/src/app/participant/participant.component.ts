@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { ParticipantService } from '../services/participant.service';
 import { Participant } from '../models/participant';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-participant',
@@ -17,6 +17,11 @@ export class ParticipantComponent implements OnInit {
   public name = new FormControl('');
   public key = new FormControl('');
 
+  public joinGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    key: new FormControl('', Validators.required)
+  });
+
   constructor(private participantService: ParticipantService) {
 
     participantService.connected.subscribe(success => {
@@ -27,7 +32,6 @@ export class ParticipantComponent implements OnInit {
       }
     });
 
-    // TODO: Need to listen for successfully created participant here
     participantService.participantCreated.subscribe(participant => {
       this.participant = participant;
       this.joined = true;
@@ -38,8 +42,9 @@ export class ParticipantComponent implements OnInit {
   }
 
   public join() {
+    console.log('Joined called');
     if (this.connected && !this.joined) {
-      this.participantService.createParticipant(this.key.value, this.name.value);
+      this.participantService.createParticipant(this.joinGroup.get('key').value, this.joinGroup.get('name').value);
     }
   }
 

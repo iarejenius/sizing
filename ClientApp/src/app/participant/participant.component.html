@@ -1,16 +1,22 @@
 <h1>Welcome, participant</h1>
-<div *ngIf="participant == null">
-  <label>
-    Session key:
-    <input type="text" [formControl]="key">
-  </label>
-
-  <label>
-    Name:
-    <input type="text" [formControl]="name">
-  </label>
+<div [formGroup]="joinGroup" *ngIf="participant == null">
+  <div>
+    <p>
+      The session key is visible on the shared session page.
+    </p>
+    <label>
+      Session key:
+      <input type="text" formControlName="key">
+    </label>
+  </div>
+  <div>
+    <label>
+      Name:
+      <input type="text" formControlName="name">
+    </label>
+  </div>
   <p>
-    <button (click)="join()" [disabled]="!key.value || !name.value" class="btn btn-primary">Join</button>
+    <button (click)="join()" [disabled]="!joinGroup.valid" class="btn btn-primary">Join</button>
   </p>
 </div>
 <div *ngIf="participant">

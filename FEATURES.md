@@ -25,3 +25,6 @@
 2. Display "waiting for participants to join" if no participants
 3. Prompt for session key and name, both required, and enable the join button when populated
 4. Display explanation of session key
+5. Remove nav bar
+6. Display input for size on participant page
+7. Display "?" if participant has set a size
