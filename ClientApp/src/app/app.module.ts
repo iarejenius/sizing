@@ -29,9 +29,7 @@ import { ParticipantComponent } from './participant/participant.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: SessionComponent, pathMatch: 'full' },
       { path: 'session', component: SessionComponent },
       { path: 'participant', component: ParticipantComponent },
     ])
