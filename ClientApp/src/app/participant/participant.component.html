@@ -23,4 +23,10 @@
   <label>
     Name: <span>{{participant.name}}</span>
   </label>
+  <div [formGroup]="sizeGroup">
+    <label>
+      Size:
+      <input type="number" formControlName="size">
+    </label>
+  </div>
 </div>

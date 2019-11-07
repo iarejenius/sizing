@@ -43,6 +43,18 @@ export class SessionComponent implements OnInit {
       const index = this.participants.findIndex(p => p.id === participant.id);
       this.participants.splice(index, 1);
     });
+
+    this.sessionService.participantUpdated.subscribe(participant => {
+      console.log(`${participant.name} updated`);
+      const participantToUpdate = this.participants.find((p, i) => {
+        if (p.id === participant.id) {
+          return true;
+        }
+      });
+      if (participantToUpdate !== null) {
+        participantToUpdate.size = participant.size;
+      }
+    });
   }
 
   ngOnInit() { }

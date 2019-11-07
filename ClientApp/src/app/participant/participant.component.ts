@@ -14,12 +14,15 @@ export class ParticipantComponent implements OnInit {
   private connected = false;
   public participant: Participant;
 
-  public name = new FormControl('');
-  public key = new FormControl('');
-
   public joinGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    key: new FormControl('', Validators.required)
+    key: new FormControl('', Validators.required),
+  });
+
+  public size = new FormControl('');
+
+  public sizeGroup = new FormGroup({
+    size: this.size
   });
 
   constructor(private participantService: ParticipantService) {
@@ -35,6 +38,14 @@ export class ParticipantComponent implements OnInit {
     participantService.participantCreated.subscribe(participant => {
       this.participant = participant;
       this.joined = true;
+
+      this.size.valueChanges.subscribe(value => {
+        this.participant.size = value;
+        this.participantService.updateParticipant(this.participant);
+      });
+
+      this.size.registerOnChange(() => {
+      });
     });
   }
 
