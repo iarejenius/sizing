@@ -30,3 +30,22 @@
 7. Display "?" if participant has set a size
 8. Reset sizes
 9. Indicate on participant component that size has been reset
+10. Remove logging
+
+# Visual updates
+## Session
+### Content
+- Add title
+- Add description on how to join session that embeds key to use
+### Layout
+- Center title
+- Center description
+- Highlight session in description
+- Layout participants horizontally
+- Make the size big
+- Put the name below the size
+- Put a boundary around the participant information
+
+## Participant
+### Content
+### Layout
