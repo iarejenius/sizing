@@ -12,6 +12,7 @@ export class ParticipantComponent implements OnInit {
 
   private joined = false;
   private connected = false;
+  private isSizeCleared = false;
   public participant: Participant;
 
   public joinGroup = new FormGroup({
@@ -48,6 +49,10 @@ export class ParticipantComponent implements OnInit {
     participantService.sizeCleared.subscribe(() => {
       console.log('size cleared');
       this.size.setValue(undefined);
+      this.isSizeCleared = true;
+      setTimeout(() => {
+        this.isSizeCleared = false;
+      }, 3000);
     });
   }
 

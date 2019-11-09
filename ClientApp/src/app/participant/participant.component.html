@@ -24,6 +24,9 @@
     Name: <span>{{participant.name}}</span>
   </label>
   <div [formGroup]="sizeGroup">
+    <div *ngIf="isSizeCleared">
+      Size cleared
+    </div>
     <label>
       Size:
       <input type="number" formControlName="size">
