@@ -28,3 +28,5 @@
 5. Remove nav bar
 6. Display input for size on participant page
 7. Display "?" if participant has set a size
+8. Reset sizes
+9. Indicate on participant component that size has been reset

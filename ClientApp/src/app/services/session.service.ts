@@ -66,9 +66,15 @@ export class SessionService {
 
   }
 
-  createSession() {
+  public createSession() {
     this.connection.send('createSession')
       .then(() => console.log('message sent'))
+      .catch((err) => console.error(err));
+  }
+
+  public clearSizes(sessionKey: string) {
+    this.connection.send('clearSize', sessionKey)
+      .then(() => console.log('clearing sizes'))
       .catch((err) => console.error(err));
   }
 

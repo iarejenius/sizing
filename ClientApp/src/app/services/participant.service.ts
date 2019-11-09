@@ -9,7 +9,7 @@ import { Participant } from '../models/participant';
 export class ParticipantService {
 
   private connection: signalR.HubConnection;
-  public clearSize: Observable<any>;
+  public sizeCleared: Observable<void>;
   public connected: Observable<boolean>;
   public participantCreated: Observable<Participant>;
 
@@ -34,6 +34,15 @@ export class ParticipantService {
       });
       return () => {
         this.connection.off('participantCreated', observer.next);
+      };
+    });
+
+    this.sizeCleared = new Observable<void>((observer) => {
+      this.connection.on('clearSize', () => {
+        observer.next();
+      });
+      return () => {
+        this.connection.off('clearSize', observer.next);
       };
     });
   }

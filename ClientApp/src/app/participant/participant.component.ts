@@ -43,9 +43,11 @@ export class ParticipantComponent implements OnInit {
         this.participant.size = value;
         this.participantService.updateParticipant(this.participant);
       });
+    });
 
-      this.size.registerOnChange(() => {
-      });
+    participantService.sizeCleared.subscribe(() => {
+      console.log('size cleared');
+      this.size.setValue(undefined);
     });
   }
 

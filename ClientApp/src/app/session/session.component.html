@@ -8,6 +8,7 @@
 </div>
 <div *ngIf="participants">
   <button (click)="reveal()" [disabled]="participants.length < 1" class="btn btn-primary">Reveal</button>
+  <button (click)="clear()" [disabled]="!isRevealed" class="btn btn-primary">Clear</button>
   <div *ngFor="let p of participants">
     <div>
       {{p.name}}

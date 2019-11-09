@@ -81,10 +81,13 @@ namespace sizing.Hubs
 
         // Endpoint to handle when session clears sizes
         // Add observable to participant service for when size is cleared
-        public async Task ClearSize(Session session)
+        public async Task ClearSize(string sessionKey)
         {
-            SessionRepository.GetSession(session.Key);
-            await Clients.Group(session.Key).SendAsync("clearSize");
+            var session = SessionRepository.GetSession(sessionKey);
+            if (session != null)
+            {
+                await Clients.Group(sessionKey).SendAsync("clearSize");
+            }
         }
 
     }
