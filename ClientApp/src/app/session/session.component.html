@@ -7,12 +7,18 @@
   Waiting for participants to join...
 </div>
 <div *ngIf="participants">
+  <button (click)="reveal()" [disabled]="participants.length < 1" class="btn btn-primary">Reveal</button>
   <div *ngFor="let p of participants">
     <div>
       {{p.name}}
     </div>
-    <div>
-      {{p.size}}
+    <div *ngIf="p.size">
+      <div *ngIf="isRevealed">
+        {{p.size}}
+      </div>
+      <div *ngIf="!isRevealed">
+        ?
+      </div>
     </div>
   </div>
 </div>

@@ -10,10 +10,12 @@ import { Participant } from '../models/participant';
 })
 export class SessionComponent implements OnInit {
 
-  private key: string;
+  public key: string;
+  public isRevealed: boolean;
   private participants: Participant[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private sessionService: SessionService) {
+    this.isRevealed = false;
 
     this.sessionService.sessionCreated.subscribe((session: Session) => {
       console.log(session);
@@ -58,5 +60,9 @@ export class SessionComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  public reveal() {
+    this.isRevealed = true;
+  }
 
 }
