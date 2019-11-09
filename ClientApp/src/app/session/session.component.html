@@ -1,25 +1,34 @@
-<p>
-  session works!
-</p>
-<label>Key: </label>
-<p>{{key}}</p>
-<div *ngIf="participants.length < 1">
+<div class="row">
+  <h1>Sizing Session</h1>
+</div>
+<div class="row">
+  <h4 class="text-muted">To join this session, navigate to {{"(url goes here)"}} and enter the session key <span
+      class="badge badge-info">{{key}}</span></h4>
+</div>
+<div class="row" *ngIf="participants.length < 1">
   Waiting for participants to join...
 </div>
-<div *ngIf="participants">
-  <button (click)="reveal()" [disabled]="participants.length < 1" class="btn btn-primary">Reveal</button>
-  <button (click)="clear()" [disabled]="!isRevealed" class="btn btn-primary">Clear</button>
-  <div *ngFor="let p of participants">
-    <div>
+<div class="row" *ngIf="participants">
+  <div class="card" *ngFor="let p of participants">
+    <div class="card-body">
+      <div *ngIf="!p.size">
+        ...
+      </div>
+      <div *ngIf="p.size">
+        <div *ngIf="isRevealed && p.size">
+          {{p.size}}
+        </div>
+        <div *ngIf="!isRevealed">
+          ?
+        </div>
+      </div>
+    </div>
+    <div class="card-header">
       {{p.name}}
     </div>
-    <div *ngIf="p.size">
-      <div *ngIf="isRevealed">
-        {{p.size}}
-      </div>
-      <div *ngIf="!isRevealed">
-        ?
-      </div>
-    </div>
   </div>
+</div>
+<div class="row">
+  <button (click)="reveal()" [disabled]="participants.length < 1" class="btn btn-primary">Reveal</button>
+  <button (click)="clear()" [disabled]="!isRevealed" class="btn btn-primary">Clear</button>
 </div>

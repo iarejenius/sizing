@@ -21,15 +21,15 @@
 - Indicate when score has been reset
 
 # Feature priority
-1. Display participant names
-2. Display "waiting for participants to join" if no participants
-3. Prompt for session key and name, both required, and enable the join button when populated
-4. Display explanation of session key
-5. Remove nav bar
-6. Display input for size on participant page
-7. Display "?" if participant has set a size
-8. Reset sizes
-9. Indicate on participant component that size has been reset
+1. ~~Display participant names~~
+2. ~~Display "waiting for participants to join" if no participants~~
+3. ~~Prompt for session key and name, both required, and enable the join button when populated~~
+4. ~~Display explanation of session key~~
+5. ~~Remove nav bar~~
+6. ~~Display input for size on participant page~~
+7. ~~Display "?" if participant has set a size~~
+8. ~~Reset sizes~~
+9. ~~Indicate on participant component that size has been reset~~
 10. Remove logging
 
 # Visual updates
@@ -40,6 +40,7 @@
 ### Layout
 - Center title
 - Center description
+- Spacing around buttons
 - Highlight session in description
 - Layout participants horizontally
 - Make the size big
