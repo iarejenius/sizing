@@ -67,6 +67,7 @@ export class SessionComponent implements OnInit {
 
   public clear() {
     this.sessionService.clearSizes(this.key);
+    this.isRevealed = false;
   }
 
 }
