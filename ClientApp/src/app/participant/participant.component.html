@@ -1,9 +1,9 @@
-<h1>Welcome, participant</h1>
 <div [formGroup]="joinGroup" *ngIf="participant == null">
+  <h1>Join a sizing session</h1>
+  <h4 class="text-muted">
+    The session key is visible on the shared session page.
+  </h4>
   <div>
-    <p>
-      The session key is visible on the shared session page.
-    </p>
     <label>
       Session key:
       <input type="text" formControlName="key">
@@ -20,6 +20,9 @@
   </p>
 </div>
 <div *ngIf="participant">
+  <h4 class="text-muted">
+    Enter your size estimate below
+  </h4>
   <label>
     Name: <span>{{participant.name}}</span>
   </label>
