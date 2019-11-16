@@ -12,6 +12,7 @@ export class SessionComponent implements OnInit {
 
   public key: string;
   public isRevealed: boolean;
+  public participantUrl = window.location.origin + '/' + 'participant';
   private participants: Participant[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private sessionService: SessionService) {

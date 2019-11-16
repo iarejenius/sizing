@@ -10,6 +10,10 @@
 # Functionality changes
 - Dynamically display url for participant
 
+## Clean up
+- Remove logging
+- Remove template piece not being used
+
 # Visual changes
 ## General
 ### Material
