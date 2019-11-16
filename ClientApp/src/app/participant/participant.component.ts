@@ -17,7 +17,7 @@ export class ParticipantComponent implements OnInit {
 
   public joinGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    key: new FormControl('', Validators.required),
+    key: new FormControl('', Validators.required)
   });
 
   public size = new FormControl('');
@@ -57,6 +57,9 @@ export class ParticipantComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.joinGroup.get('key').valueChanges.subscribe((value: string) => {
+      this.joinGroup.get('key').setValue(value.toUpperCase(), { emitEvent: false });
+    });
   }
 
   public join() {
