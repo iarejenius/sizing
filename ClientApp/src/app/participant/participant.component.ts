@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../services/session.service';
 import { ParticipantService } from '../services/participant.service';
 import { Participant } from '../models/participant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -57,6 +56,7 @@ export class ParticipantComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Force key input to be upper case
     this.joinGroup.get('key').valueChanges.subscribe((value: string) => {
       this.joinGroup.get('key').setValue(value.toUpperCase(), { emitEvent: false });
     });

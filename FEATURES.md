@@ -1,5 +1,4 @@
 # Feature priority
-11. Force upper case session key
 12. Dynamically display url for participant
 
 # Visual updates
