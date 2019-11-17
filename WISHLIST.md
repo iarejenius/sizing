@@ -12,12 +12,11 @@
 
 ## Clean up
 - Remove logging
-- Remove template piece not being used
+- Remove template pieces not being used
 
 # Visual changes
 ## General
 ### Material
-- Install and convert existing components
 - Use blip thing to indicate size changes or other updates
 #### Custom theme
 https://material.angular.io/guide/theming#defining-a-custom-theme
@@ -27,7 +26,7 @@ https://material.angular.io/guide/theming#defining-a-custom-theme
 ### Content
 
 ### Layout
-- Align cards left to right
+- Spacing between rows
 
 ## Participant
 ### Content
