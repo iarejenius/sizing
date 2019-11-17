@@ -1,48 +1,44 @@
-<div class="row">
-  <h1 class="col">Sizing Session</h1>
-</div>
+<section class="mat-typography container">
+  <div class="row">
+    <h1 class="col">Sizing Session</h1>
+  </div>
 
-<div class="row">
-  <h4 class="col text-muted">To join this session, navigate to {{participantUrl}} and enter the session key <span
-      class="badge badge-info">{{key}}</span></h4>
-</div>
+  <div class="row">
+    <h4 class="col text-muted">
+      <mat-chip-list>To join this session, navigate to <mat-chip>{{participantUrl}}</mat-chip> and enter the session key <mat-chip>{{key}}</mat-chip>
+      </mat-chip-list>
+    </h4>
+  </div>
 
-<div class="row" *ngIf="participants.length < 1">
-  <p class="col">Waiting for participants to join...</p>
-</div>
+  <div class="row" *ngIf="participants.length < 1">
+    <p class="col">Waiting for participants to join...</p>
+  </div>
 
-<div class="row justify-content-around" *ngIf="participants">
-  <div class="col-2 card" *ngFor="let p of participants">
-    <div class="card-body">
-      <h2 *ngIf="!p.size">
-        <span class="badge badge-light">...</span>
-      </h2>
-      <div *ngIf="p.size">
-        <h2>
-          <span class="badge badge-secondary" *ngIf="isRevealed && p.size">
+  <div class="row justify-content-start" *ngIf="participants">
+    <div class="col-2" *ngFor="let p of participants">
+      <mat-card>
+        <mat-card-title>{{p.name}}</mat-card-title>
+        <mat-card-content>
+          <div *ngIf="!p.size" class="mat-display-3">
+            ...
+          </div>
+          <div *ngIf="p.size && isRevealed" class="mat-display-3">
             {{p.size}}
-          </span>
-        </h2>
-        <h2>
-          <span class="badge badge-light" *ngIf="!isRevealed">
+          </div>
+          <div *ngIf="p.size && !isRevealed" class="mat-display-3">
             ?
-          </span>
-        </h2>
-      </div>
-    </div>
-    <div class="card-header">
-      {{p.name}}
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-</div>
 
-<div class="row justify-content-start">
-  <div class="col-2">
-    <button (click)="reveal()" [disabled]="participants.length < 1" class="btn btn-primary">Reveal</button>
-
+  <div class="row justify-content-start">
+    <div class="col-2">
+      <button (click)="reveal()" [disabled]="participants.length < 1" mat-raised-button color="primary">Reveal</button>
+    </div>
+    <div class="col-2">
+      <button (click)="clear()" [disabled]="!isRevealed" mat-raised-button color="primary">Clear</button>
+    </div>
   </div>
-  <div class="col-2">
-    <button (click)="clear()" [disabled]="!isRevealed" class="btn btn-primary">Clear</button>
-
-  </div>
-</div>
+</section>
