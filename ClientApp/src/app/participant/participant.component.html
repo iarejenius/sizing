@@ -1,38 +1,35 @@
-<div [formGroup]="joinGroup" *ngIf="participant == null">
-  <h1>Join a sizing session</h1>
-  <h4 class="text-muted">
-    The session key is visible on the shared session page.
-  </h4>
-  <div>
-    <label>
-      Session key:
-      <input type="text" formControlName="key">
-    </label>
-  </div>
-  <div>
-    <label>
-      Name:
-      <input type="text" formControlName="name">
-    </label>
-  </div>
-  <p>
-    <button (click)="join()" [disabled]="!joinGroup.valid" class="btn btn-primary">Join</button>
-  </p>
-</div>
-<div *ngIf="participant">
-  <h4 class="text-muted">
-    Enter your size estimate below
-  </h4>
-  <label>
-    Name: <span>{{participant.name}}</span>
-  </label>
-  <div [formGroup]="sizeGroup">
-    <div *ngIf="isSizeCleared">
-      Size cleared
+<section class="mat-typography">
+  <div [formGroup]="joinGroup" *ngIf="participant == null">
+    <h1>Join a sizing session</h1>
+    <h4 class="text-muted">
+      The session key is visible on the shared session page.
+    </h4>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="key" placeholder="Session key">
+      </mat-form-field>
     </div>
-    <label>
-      Size:
-      <input type="number" formControlName="size">
-    </label>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name">
+      </mat-form-field>
+    </div>
+    <p>
+      <button (click)="join()" [disabled]="!joinGroup.valid" mat-raised-button color="primary">Join</button>
+    </p>
   </div>
-</div>
+  <div *ngIf="participant">
+    <h3>Welcome, {{participant.name}}!</h3>
+    <h4 class="text-muted">
+      Enter your estimated size below
+    </h4>
+    <div [formGroup]="sizeGroup">
+      <div *ngIf="isSizeCleared">
+        Size cleared
+      </div>
+      <mat-form-field>
+        <input matInput formControlName="size" placeholder="Size">
+      </mat-form-field>
+    </div>
+  </div>
+</section>

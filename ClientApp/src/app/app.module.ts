@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material'
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button'; 
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -34,7 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'session', component: SessionComponent },
       { path: 'participant', component: ParticipantComponent },
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
