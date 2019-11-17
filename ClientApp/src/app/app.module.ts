@@ -12,6 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SessionComponent } from './session/session.component';
 import { ParticipantComponent } from './participant/participant.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ParticipantComponent } from './participant/participant.component';
       { path: '', component: SessionComponent, pathMatch: 'full' },
       { path: 'session', component: SessionComponent },
       { path: 'participant', component: ParticipantComponent },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
