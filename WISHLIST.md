@@ -16,6 +16,9 @@
 
 # Visual changes
 ## General
+
+## Font
+
 ### Material
 - Use blip thing to indicate size changes or other updates
 #### Custom theme
