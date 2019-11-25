@@ -1,31 +1,41 @@
 # Repo
 ## Readme
-- Add readme
-    - Description
-    - Requirements
-    - Running
+- Add image of app once it's finished
+- Add
+    - Contribute section
+    - Testing section
+    - Deploy instructions?
 
 ## License
 
+# Testing
+## Get existing tests working
+
+## Add relevant new tests
+- Happy paths
+
 # Functionality changes
-- Dynamically display url for participant
 
 ## Clean up
 - Remove logging
-- Remove template piece not being used
+- Remove template pieces not being used
 
 # Visual changes
 ## General
+
+## Font
+
 ### Material
-- Install and convert existing components
 - Use blip thing to indicate size changes or other updates
+#### Custom theme
+https://material.angular.io/guide/theming#defining-a-custom-theme
 
 ## Session
 
 ### Content
 
 ### Layout
-- Align cards left to right
+- Spacing between rows
 
 ## Participant
 ### Content

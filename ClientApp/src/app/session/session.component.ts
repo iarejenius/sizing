@@ -6,7 +6,8 @@ import { Participant } from '../models/participant';
 
 @Component({
   selector: 'app-session',
-  templateUrl: './session.component.html'
+  templateUrl: './session.component.html',
+  styleUrls: ['./session.component.scss']
 })
 export class SessionComponent implements OnInit {
 
