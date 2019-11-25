@@ -8,6 +8,12 @@
 
 ## License
 
+# Testing
+## Get existing tests working
+
+## Add relevant new tests
+- Happy paths
+
 # Functionality changes
 
 ## Clean up
