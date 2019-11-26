@@ -27,7 +27,6 @@ namespace sizing.Hubs
         public async Task CreateSession()
         {
             var session = SessionRepository.CreateSession(Context.ConnectionId);
-            Console.WriteLine(session);
             await Clients.Caller.SendAsync("sessionCreated", session);
         }
 
@@ -36,7 +35,6 @@ namespace sizing.Hubs
             var parentSession = SessionRepository.GetSession(sessionKey);
             var participant = SessionRepository.CreateParticipant(sessionKey, name);
             participant.ConnectionId = Context.ConnectionId;
-            Console.WriteLine(participant);
 
             await Task.WhenAll(
                 Groups.AddToGroupAsync(Context.ConnectionId, sessionKey),
@@ -62,7 +60,6 @@ namespace sizing.Hubs
         // Add observable to session service for when a particular participant updates
         public async Task UpdateParticipant(Participant updatedParticipant)
         {
-            Console.WriteLine("Updating participant");
             SessionRepository.UpdateParticipant(updatedParticipant);
             var parentSession = SessionRepository.GetSession(updatedParticipant.SessionKey);
             await Clients.Client(parentSession.ConnectionId).SendAsync("participantUpdated", updatedParticipant);
@@ -72,7 +69,6 @@ namespace sizing.Hubs
         // Add observable to session service for when a particular participant exits
         public async Task RemoveParticipant(Participant removeParticipant)
         {
-            Console.WriteLine("Removing participant");
             SessionRepository.RemoveParticipant(removeParticipant);
             var parentSession = SessionRepository.GetSession(removeParticipant.SessionKey);
             await Groups.RemoveFromGroupAsync(removeParticipant.ConnectionId, removeParticipant.SessionKey);

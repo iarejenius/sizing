@@ -49,13 +49,11 @@ export class ParticipantService {
 
   public createParticipant(sessionKey: string, name: string) {
     this.connection.send('createParticipant', sessionKey, name)
-      .then(() => console.log('message sent to create participant'))
       .catch((err) => console.error(err));
   }
 
   public updateParticipant(participant: Participant) {
     this.connection.send('updateParticipant', participant)
-      .then(() => console.log('message sent to update participant'))
       .catch((err) => console.error(err));
   }
 }
