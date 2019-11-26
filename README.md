@@ -1,7 +1,7 @@
 # Sizing
-### A real time, collabrative webapp for sharing story size estimates based on .NET Core and Angular.
+### A clean, streamlined webapp for real time collaboration on story size estimates based on .NET Core and Angular.
 
-## TODO put an image of it here
+![Session example 1](https://github.com/iarejenius/sizing/blob/master/docs/session1.PNG)
 
 ## Requirements
 - [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
