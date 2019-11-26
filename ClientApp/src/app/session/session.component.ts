@@ -20,7 +20,6 @@ export class SessionComponent implements OnInit {
     this.isRevealed = false;
 
     this.sessionService.sessionCreated.subscribe((session: Session) => {
-      console.log(session);
       this.key = session.key;
     });
 
@@ -38,18 +37,15 @@ export class SessionComponent implements OnInit {
 
     // Set up participant handlers here.
     this.sessionService.participantJoined.subscribe(participant => {
-      console.log(`${participant.name} joined`);
       this.participants.push(participant);
     });
 
     this.sessionService.participantLeft.subscribe(participant => {
-      console.log(`${participant.name} left`);
       const index = this.participants.findIndex(p => p.id === participant.id);
       this.participants.splice(index, 1);
     });
 
     this.sessionService.participantUpdated.subscribe(participant => {
-      console.log(`${participant.name} updated`);
       const participantToUpdate = this.participants.find((p, i) => {
         if (p.id === participant.id) {
           return true;

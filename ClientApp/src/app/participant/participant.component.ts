@@ -46,7 +46,6 @@ export class ParticipantComponent implements OnInit {
     });
 
     participantService.sizeCleared.subscribe(() => {
-      console.log('size cleared');
       this.size.setValue(undefined);
       this.isSizeCleared = true;
       setTimeout(() => {
@@ -63,7 +62,6 @@ export class ParticipantComponent implements OnInit {
   }
 
   public join() {
-    console.log('Joined called');
     if (this.connected && !this.joined) {
       this.participantService.createParticipant(this.joinGroup.get('key').value, this.joinGroup.get('name').value);
     }
