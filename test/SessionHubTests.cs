@@ -168,5 +168,132 @@ namespace test
             mockRepo.Verify(repo => repo.RemoveSession(It.Is<string>(s => s == testSessionKey)), Times.Never());
 
         }
+
+        // UpdateParticipant -- repo.UpdateParticipant and GetSession are called
+        // mock Clients.Client
+        [Fact]
+        public async Task UpdateParticipant_Success()
+        {
+            //Given
+            Mock<IHubCallerClients> mockClients = new Mock<IHubCallerClients>();
+            Mock<IClientProxy> mockClientProxy = new Mock<IClientProxy>();
+            mockClients.Setup(clients => clients.Client(It.IsAny<string>())).Returns(mockClientProxy.Object);
+            Mock<HubCallerContext> mockContext = new Mock<HubCallerContext>();
+     
+            var mockRepo = new Mock<ISessionRepository>();
+            var testSession = new Session
+            {
+                ConnectionId = "test connection id",
+                Key = "test key",
+                Participants = new List<Participant>()
+            };
+            mockRepo
+                .Setup(x => x.GetSession(It.Is<string>(s => s == testSession.Key)))
+                .Returns(testSession)
+                .Verifiable();
+
+            var testParticipant = new Participant {
+                ConnectionId = "test participant connection id",
+                Id = Guid.NewGuid(),
+                Name = "test name",
+                SessionKey = testSession.Key
+            };
+            mockRepo
+                .Setup(x => x.UpdateParticipant(It.Is<Participant>(p => p == testParticipant)))
+                .Verifiable();
+
+            var sut = new SessionHub(mockRepo.Object)
+            {
+                Clients = mockClients.Object,
+                Context = mockContext.Object
+            };
+
+            // When
+            await sut.UpdateParticipant(testParticipant);
+
+            // Test
+            mockRepo.Verify();
+        }
+
+        // RemoveParticipant -- repo.RemoveParticipant .GetSession are called
+        // mock Groups & Clients.Client
+        [Fact]
+        public async Task RemoveParticipant_Success()
+        {
+            //Given
+            Mock<IHubCallerClients> mockClients = new Mock<IHubCallerClients>();
+            Mock<IClientProxy> mockClientProxy = new Mock<IClientProxy>();
+            mockClients.Setup(clients => clients.Client(It.IsAny<string>())).Returns(mockClientProxy.Object);
+            Mock<IGroupManager> mockGroup = new Mock<IGroupManager>();
+            Mock<HubCallerContext> mockContext = new Mock<HubCallerContext>();
+     
+            var mockRepo = new Mock<ISessionRepository>();
+            var testSession = new Session
+            {
+                ConnectionId = "test connection id",
+                Key = "test key",
+                Participants = new List<Participant>()
+            };
+            mockRepo
+                .Setup(x => x.GetSession(It.Is<string>(s => s == testSession.Key)))
+                .Returns(testSession)
+                .Verifiable();
+
+            var testParticipant = new Participant {
+                ConnectionId = "test participant connection id",
+                Id = Guid.NewGuid(),
+                Name = "test name",
+                SessionKey = testSession.Key
+            };
+            mockRepo
+                .Setup(x => x.RemoveParticipant(It.Is<Participant>(p => p == testParticipant)))
+                .Verifiable();
+
+            var sut = new SessionHub(mockRepo.Object)
+            {
+                Clients = mockClients.Object,
+                Context = mockContext.Object,
+                Groups = mockGroup.Object
+            };
+
+            // When
+            await sut.RemoveParticipant(testParticipant);
+
+            // Test
+            mockRepo.Verify();
+        }
+        
+        // ClearSize -- repo.GetSession is called
+        // mock Clients.Group
+        [Fact]
+        public async Task ClearSize_Success()
+        {
+            //Given
+            Mock<IHubCallerClients> mockClients = new Mock<IHubCallerClients>();
+            Mock<IClientProxy> mockClientProxy = new Mock<IClientProxy>();
+            mockClients.Setup(clients => clients.Client(It.IsAny<string>())).Returns(mockClientProxy.Object);
+            Mock<HubCallerContext> mockContext = new Mock<HubCallerContext>();
+     
+            var mockRepo = new Mock<ISessionRepository>();
+            var testSessionKey = "test key";
+
+            mockRepo
+                .Setup(x => x.GetSession(It.Is<string>(s => s == testSessionKey)))
+                .Verifiable();
+
+
+            var sut = new SessionHub(mockRepo.Object)
+            {
+                Clients = mockClients.Object,
+                Context = mockContext.Object
+            };
+
+            // When
+            await sut.ClearSize(testSessionKey);
+
+            // Test
+            mockRepo.Verify();
+        }
+
     }
 }
