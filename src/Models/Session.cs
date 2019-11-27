@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Models
+namespace sizing.Models
 {
 
-    class Session
+    public class Session
     {
         const string possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        public Session() { }
 
         public Session(string connectionId)
         {
@@ -23,7 +25,7 @@ namespace Models
         }
 
         public string Key { get; set; }
-        public List<Models.Participant> Participants { get; set; }
+        public List<sizing.Models.Participant> Participants { get; set; }
         public string ConnectionId { get; set; }
 
     }

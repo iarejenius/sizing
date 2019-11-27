@@ -1,8 +1,8 @@
 using System;
 
-namespace Models
+namespace sizing.Models
 {
-    class Participant
+    public class Participant
     {
         public Participant(string name)
         {
