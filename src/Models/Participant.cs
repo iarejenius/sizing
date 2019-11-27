@@ -4,6 +4,8 @@ namespace sizing.Models
 {
     public class Participant
     {
+        public Participant() {}
+
         public Participant(string name)
         {
             Name = name;
