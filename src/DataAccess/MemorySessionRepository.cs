@@ -1,33 +1,33 @@
 using System.Collections.Generic;
-using Models;
-namespace DataAccess
+using sizing.Models;
+namespace sizing.DataAccess
 {
-    class MemorySessionRepository : ISessionRepository
+    public class MemorySessionRepository : ISessionRepository
     {
-        private Dictionary<string, Models.Session> Sessions { get; set; }
+        private Dictionary<string, sizing.Models.Session> Sessions { get; set; }
 
         public MemorySessionRepository()
         {
-            Sessions = new Dictionary<string, Models.Session>();
+            Sessions = new Dictionary<string, sizing.Models.Session>();
         }
 
-        public Models.Participant CreateParticipant(string sessionKey, string name)
+        public sizing.Models.Participant CreateParticipant(string sessionKey, string name)
         {
             var session = GetSession(sessionKey);
-            var participant = new Models.Participant(name);
+            var participant = new sizing.Models.Participant(name);
             participant.SessionKey = sessionKey;
             session.Participants.Add(participant);
             return participant;
         }
 
-        public Models.Session CreateSession(string connectionId)
+        public sizing.Models.Session CreateSession(string connectionId)
         {
-            var session = new Models.Session(connectionId);
+            var session = new sizing.Models.Session(connectionId);
             Sessions.Add(session.Key, session);
             return session;
         }
 
-        public Models.Session GetSession(string key)
+        public sizing.Models.Session GetSession(string key)
         {
             return Sessions[key];
         }

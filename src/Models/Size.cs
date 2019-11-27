@@ -1,6 +1,6 @@
-namespace Models
+namespace sizing.Models
 {
-    class Size
+    public class Size
     {
         public string Value { get; set; }
 

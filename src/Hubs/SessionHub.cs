@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.SignalR;
-using Models;
+using sizing.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace sizing.Hubs
 {
-    class SessionHub : Hub
+    public class SessionHub : Hub
     {
         public DataAccess.ISessionRepository SessionRepository { get; set; }
 
