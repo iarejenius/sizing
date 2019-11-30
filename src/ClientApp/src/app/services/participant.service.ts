@@ -1,22 +1,18 @@
-import { Injectable } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Participant } from '../models/participant';
+import { SignalRConnection } from './signalr-connection.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipantService {
 
-  private connection: signalR.HubConnection;
   public sizeCleared: Observable<void>;
   public connected: Observable<boolean>;
   public participantCreated: Observable<Participant>;
 
-  constructor() {
-    this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('/hub')
-      .build();
+  constructor(private connection: SignalRConnection) {
 
     this.connected = new Observable<boolean>((observer) => {
       this.connection.start()

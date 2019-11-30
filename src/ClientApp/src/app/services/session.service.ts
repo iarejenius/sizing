@@ -3,23 +3,20 @@ import * as signalR from '@aspnet/signalr';
 import { Observable } from 'rxjs';
 import { Session } from '../models/session';
 import { Participant } from '../models/participant';
+import { SignalRConnection } from './signalr-connection.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  private connection: signalR.HubConnection;
   public sessionCreated: Observable<Session>;
   public participantJoined: Observable<Participant>;
   public participantUpdated: Observable<Participant>;
   public participantLeft: Observable<Participant>;
   public connected: Observable<boolean>;
 
-  constructor() {
-    this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('/hub')
-      .build();
+  constructor(private connection: SignalRConnection) {
 
     this.connected = new Observable<boolean>((observer) => {
       this.connection.start()
