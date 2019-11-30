@@ -14,7 +14,7 @@ export class SessionComponent implements OnInit {
   public key: string;
   public isRevealed: boolean;
   public participantUrl = window.location.origin + '/' + 'participant';
-  private participants: Participant[] = [];
+  public participants: Participant[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private sessionService: SessionService) {
     this.isRevealed = false;
@@ -35,7 +35,6 @@ export class SessionComponent implements OnInit {
       }
     });
 
-    // Set up participant handlers here.
     this.sessionService.participantJoined.subscribe(participant => {
       this.participants.push(participant);
     });
