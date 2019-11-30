@@ -8,7 +8,6 @@ namespace test
     using sizing.Models;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using System.Threading;
     using System;
 
     public class SessionHubTests
@@ -169,8 +168,6 @@ namespace test
 
         }
 
-        // UpdateParticipant -- repo.UpdateParticipant and GetSession are called
-        // mock Clients.Client
         [Fact]
         public async Task UpdateParticipant_Success()
         {
@@ -215,8 +212,6 @@ namespace test
             mockRepo.Verify();
         }
 
-        // RemoveParticipant -- repo.RemoveParticipant .GetSession are called
-        // mock Groups & Clients.Client
         [Fact]
         public async Task RemoveParticipant_Success()
         {
@@ -263,8 +258,6 @@ namespace test
             mockRepo.Verify();
         }
         
-        // ClearSize -- repo.GetSession is called
-        // mock Clients.Group
         [Fact]
         public async Task ClearSize_Success()
         {
@@ -294,6 +287,5 @@ namespace test
             // Test
             mockRepo.Verify();
         }
-
     }
 }
