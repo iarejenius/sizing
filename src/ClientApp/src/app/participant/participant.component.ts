@@ -9,9 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ParticipantComponent implements OnInit {
 
-  private joined = false;
-  private connected = false;
-  private isSizeCleared = false;
+  public joined = false;
+  public connected = false;
+  public isSizeCleared = false;
   public participant: Participant;
 
   public joinGroup = new FormGroup({
