@@ -1,0 +1,43 @@
+<section class="mat-typography container">
+  <div class="row">
+    <h1 class="col">Sizing Session</h1>
+  </div>
+
+  <div class="row">
+    <div class="col text-muted mat-subheading-2">
+      <p>To join this session, navigate to <span>{{participantUrl}}</span> and enter the session key <span>{{key}}</span></p>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="participants.length < 1">
+    <p class="col">Waiting for participants to join...</p>
+  </div>
+
+  <div class="row justify-content-start" *ngIf="participants">
+    <div class="col-3" *ngFor="let p of participants">
+      <mat-card>
+        <mat-card-title>{{p.name}}</mat-card-title>
+        <mat-card-content class="mat-display-3">
+          <div *ngIf="!p.size">
+            ...
+          </div>
+          <div *ngIf="p.size && isRevealed">
+            {{p.size}}
+          </div>
+          <div *ngIf="p.size && !isRevealed">
+            ?
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row justify-content-start">
+    <div class="col-2">
+      <button (click)="reveal()" [disabled]="participants.length < 1" mat-raised-button color="primary">Reveal</button>
+    </div>
+    <div class="col-2">
+      <button (click)="clear()" [disabled]="!isRevealed" mat-raised-button color="primary">Clear</button>
+    </div>
+  </div>
+</section>
