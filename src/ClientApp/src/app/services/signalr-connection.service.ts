@@ -10,7 +10,7 @@ export class SignalRConnection {
 
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
-            .withUrl("/hub")
+            .withUrl('/hub')
             .build();
     }
 
