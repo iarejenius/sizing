@@ -1,20 +1,30 @@
 using Microsoft.AspNetCore.SignalR;
 using sizing.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace sizing.Hubs
 {
+    /// <summary>
+    /// Class for handling messages to and from sizing browser session.
+    /// </summary>
     public class SessionHub : Hub
     {
-        public DataAccess.ISessionRepository SessionRepository { get; set; }
+        private DataAccess.ISessionRepository SessionRepository { get; set; }
 
+        /// <summary>
+        /// Creates an instance of <see cref="SessionHub"/>.
+        /// </summary>
+        /// <param name="sessionRepository">Respository for managing session related records.</param>  
         public SessionHub(DataAccess.ISessionRepository sessionRepository)
         {
             SessionRepository = sessionRepository;
         }
 
+        /// <summary>
+        /// Method for handling message that a connection has been ended.
+        /// </summary>
+        /// <param name="exception">Exception that caused the disconnection if available; null otherwise.</param>
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var participant = SessionRepository.FindParticipantByConnectionId(Context.ConnectionId);
@@ -24,12 +34,20 @@ namespace sizing.Hubs
             }
         }
 
+        /// <summary>
+        /// Method for handling message that a new session has been initialized.
+        /// </summary>
         public async Task CreateSession()
         {
             var session = SessionRepository.CreateSession(Context.ConnectionId);
             await Clients.Caller.SendAsync("sessionCreated", session);
         }
 
+        /// <summary>
+        /// Method for handling message that a new participant is trying to join a sizing session.
+        /// </summary>
+        /// <param name="sessionKey">The key of the session the participant wants to join.</param>
+        /// <param name="name">The name of the participant that wants to join.</param>
         public async Task CreateParticipant(string sessionKey, string name)
         {
             var parentSession = SessionRepository.GetSession(sessionKey);
@@ -42,8 +60,10 @@ namespace sizing.Hubs
                 Clients.Client(parentSession.ConnectionId).SendAsync("participantJoined", participant));
         }
 
-        // Endpoint to handle when session is terminated
-        // Add observable to participant service for when terminated
+        /// <summary>
+        /// Method for handling message that a session has ended.
+        /// </summary>
+        /// <param name="sessionKey">The key of the session that is ending.</param>
         public async Task EndSession(string sessionKey)
         {
             var session = SessionRepository.GetSession(sessionKey);
@@ -56,8 +76,10 @@ namespace sizing.Hubs
             }
         }
 
-        // Endpoint to handle when participant is updated
-        // Add observable to session service for when a particular participant updates
+        /// <summary>
+        /// Method for handling message that a participant has been updated.
+        /// </summary>
+        /// <param name="updatedParticipant">The updated participant values.</param>
         public async Task UpdateParticipant(Participant updatedParticipant)
         {
             SessionRepository.UpdateParticipant(updatedParticipant);
@@ -65,8 +87,10 @@ namespace sizing.Hubs
             await Clients.Client(parentSession.ConnectionId).SendAsync("participantUpdated", updatedParticipant);
         }
 
-        // Endpoint to handle when participant leaves
-        // Add observable to session service for when a particular participant exits
+        /// <summary>
+        /// Method for handling message that a participant has left the session.
+        /// </summary>
+        /// <param name="removeParticipant">The participant to remove.</param>
         public async Task RemoveParticipant(Participant removeParticipant)
         {
             SessionRepository.RemoveParticipant(removeParticipant);
@@ -75,8 +99,10 @@ namespace sizing.Hubs
             await Clients.Client(parentSession.ConnectionId).SendAsync("participantLeft", removeParticipant);
         }
 
-        // Endpoint to handle when session clears sizes
-        // Add observable to participant service for when size is cleared
+        /// <summary>
+        /// Method for handling message that a session should clear its sizes.
+        /// </summary>
+        /// <param name="sessionKey">The key to the session that should clear its participants' sizes.</param>
         public async Task ClearSize(string sessionKey)
         {
             var session = SessionRepository.GetSession(sessionKey);
