@@ -2,6 +2,9 @@ using System;
 
 namespace sizing.Models
 {
+    /// <summary>
+    /// Represents data associated with participant.
+    /// </summary>
     public class Participant
     {
         public Participant() {}
@@ -11,9 +14,13 @@ namespace sizing.Models
             Name = name;
             Id = Guid.NewGuid();
         }
+       
         public string Name { get; set; }
+
         public string SessionKey { get; set; }
+
         public string Size { get; set; }
+
         public Guid Id { get; set; }
 
         public string ConnectionId { get; set; }
