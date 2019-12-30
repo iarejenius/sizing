@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
 import { Observable } from 'rxjs';
 import { Session } from '../models/session';
 import { Participant } from '../models/participant';

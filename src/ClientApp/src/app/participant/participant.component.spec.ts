@@ -5,7 +5,6 @@ import { MatFormFieldModule, MatInputModule, MatButtonModule, MatChipsModule, Ma
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ParticipantService } from '../services/participant.service';
-import { Subscription } from 'rxjs';
 import { Participant } from '../models/participant';
 
 describe('ParticipantComponent', () => {

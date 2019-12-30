@@ -4,6 +4,9 @@ using System.Collections.Generic;
 namespace sizing.Models
 {
 
+    /// <summary>
+    /// Represents data associated with a session.
+    /// </summary>
     public class Session
     {
         const string possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -25,7 +28,9 @@ namespace sizing.Models
         }
 
         public string Key { get; set; }
+        
         public List<sizing.Models.Participant> Participants { get; set; }
+        
         public string ConnectionId { get; set; }
 
     }
